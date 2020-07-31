@@ -9,9 +9,11 @@ header = {
     }
 params = { 'limit' : 10 }
 
+filter_link_flair_text = 'FILTER_WORD' # You may change filter word there
+
 def print_post(res):
     for post_data in res['data']['children']:
-            if post_data['data']['link_flair_text'] == 'Продажа':
+            if post_data['data']['link_flair_text'] != filter_link_flair_text:
                 print(f"Title: {post_data['data']['title']}\nText: {post_data['data']['selftext']}\n---------")
 
 if __name__ == '__main__':
@@ -25,6 +27,7 @@ if __name__ == '__main__':
         with open('last.json', 'r') as f:
             last = f.read()
     except FileNotFoundError:
+        last = ''
         print('No last check data.')
     
     try:
